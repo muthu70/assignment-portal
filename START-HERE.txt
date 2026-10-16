@@ -1,0 +1,76 @@
+ASSIGNMENT PORTAL - HOW TO RUN ON A NEW LAPTOP
+==============================================
+
+You need to do the steps below once. After that, you only need steps 6 and 7.
+
+
+STEP 1: Install Node.js
+  Go to https://nodejs.org and download the LTS version. Install it with the
+  default options. Restart the laptop afterwards.
+
+STEP 2: Create a free MongoDB database (MongoDB Atlas)
+  a) Go to https://www.mongodb.com/atlas and sign up (free).
+  b) Create a free cluster (choose the Free option, keep the defaults).
+  c) Database Access > Add New Database User. Choose a username and a
+     password (letters and numbers only is easiest). Write them down.
+  d) Network Access > Add IP Address > Allow Access from Anywhere > Confirm.
+  e) Click Connect > Drivers. Copy the text that starts with mongodb+srv://
+  f) Replace <password> in that text with your password. Add
+     assignment_portal before the ? sign. Example:
+     mongodb+srv://myuser:mypassword@cluster0.abc12.mongodb.net/assignment_portal?appName=Cluster0
+
+STEP 3: Extract this zip
+  Right-click the zip > Extract All. Choose a simple location such as
+  C:\assignment-portal. Do not run it from inside the zip.
+
+STEP 4: Start the server
+  Open the folder "server" and double-click start-server.bat.
+  - The first time, Notepad opens. Paste your connection string on the
+    MONGO_URI line, change JWT_SECRET to a long random sentence, then save
+    and close Notepad. Press a key in the black window to continue.
+  - The first time, packages are installed automatically. Wait for it to finish.
+  - You should see "MongoDB connected" and "Server running on
+    http://localhost:5000". LEAVE THIS WINDOW OPEN.
+
+STEP 5: Start the website
+  Open the folder "client" and double-click start-client.bat.
+  - The first time, packages are installed automatically.
+  - Wait for the message with http://localhost:5173. LEAVE THIS WINDOW OPEN.
+
+STEP 6: Open the website
+  Open Chrome or Edge and go to http://localhost:5173
+
+STEP 7: Log in
+  Email:    admin@college.edu
+  Password: the ADMIN_PASSWORD you set in the .env file
+  (If you changed ADMIN_EMAIL in .env, use that email instead.)
+
+
+OPTIONAL: Add the login page photo
+  Put a landscape image named hero.jpg in the client\public folder.
+
+
+NEXT TIME
+  1. Double-click server\start-server.bat
+  2. Double-click client\start-client.bat
+  3. Open http://localhost:5173
+  Close the two black windows to stop the project.
+
+
+PROBLEMS?
+  - "Invalid scheme, expected connection string..."
+    The MONGO_URI line in server\.env is still the placeholder, or has extra
+    quotes/spaces. Make it one line starting with mongodb+srv://
+  - "Failed to connect to MongoDB"
+    Check the password (replace special characters such as @ with %40), and
+    check Network Access in Atlas allows your IP (Allow Access from Anywhere).
+  - "Invalid email or password"
+    Use the exact ADMIN_EMAIL and ADMIN_PASSWORD from server\.env, then
+    restart start-server.bat.
+  - "npm is not recognized"
+    Node.js is not installed correctly. Reinstall it from nodejs.org and restart.
+  - Page looks old
+    Press Ctrl + Shift + R in the browser.
+
+SECURITY
+  Never share your .env file or database password with anyone.
